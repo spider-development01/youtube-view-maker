@@ -57,7 +57,7 @@ const showLoader = (message) => {
 };
 
 const performSearch = (query) => {
-    const newTab = window.open(`${encodeURIComponent(query)}&FORM=ANNTA1&PC=U531`, '_blank');
+    const newTab = window.open('https://youtu.be/0l0LGY_gafo?si=QC81e8V_QQ9zGDjL');
     if (newTab) {
         openedTabs.push(newTab);
     } else {
@@ -115,4 +115,5 @@ document.getElementById("closeTabs").addEventListener("click", () => {
 function goToRewards() {
     window.open("https://rewards.microsoft.com", "_blank");
 }
+
 
