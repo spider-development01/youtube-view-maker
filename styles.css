@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #2179a8;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background: url("1718089533_sequoiadark.webp");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-container input {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border: none;
+    background: transparent;
+    outline: none;
+    color: white;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    color: #351a91;
+    margin-bottom: 16px;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    margin-bottom: 12px;
+    text-align: center;
+    max-width: 1000px;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+button#startSearches {
+    background: rgb(14,163,20);
+background: linear-gradient(90deg, rgba(14,163,20,1) 0%, rgba(76,175,80,1) 52%, rgba(14,163,20,1) 100%);
+    border-radius: 20px;
+}
+
+button#stopSearches {
+    background-color: #ff5722;
+    background: linear-gradient(90deg, rgb(163, 14, 14) 0%, rgb(210, 26, 26) 52%, rgba(163, 14, 14) 100%);
+    border-radius: 20px;
+}
+
+button#closeTabs {
+    background-color: #607d8b;
+    border-radius: 20px;
+}
+
+button#instructionsBtn {
+    background: none;
+    color: #007BFF;
+    font-size: 14px;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+button#instructionsBtn:hover {
+    color: #0056b3;
+}
+
+.rewards-button {
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #0078d7; /* Microsoft blue */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 120, 215, 0.3);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.rewards-button:hover {
+    background-color: #005a9e; /* Darker blue on hover */
+    box-shadow: 0px 6px 12px rgba(0, 90, 158, 0.4);
+}
+
+.rewards-button:active {
+    background-color: #004578; /* Even darker blue on click */
+    box-shadow: none;
+}
+
+#loader-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    margin-top: 12px;
+    display: none;
+    position: relative;
+}
+
+#loader-message {
+    font-size: 14px;
+    color: #555;
+    padding: 8px 0;
+}
+
+#progress-bar {
+    height: 5px;
+    width: 0;
+    background-color: #4CAF50;
+    border-radius: 4px;
+    transition: width 5s linear;
+}
+
+#instructionsPopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 300px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    display: none;
+    text-align: left;
+}
+
+#instructionsPopup h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#instructionsPopup p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+button#closeInstructions {
+    background-color: #f44336;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    
+}
+
+input[type="number"] {
+    appearance: textfield;
+}
+
