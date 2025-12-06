@@ -57,7 +57,7 @@ const showLoader = (message) => {
 };
 
 const performSearch = (query) => {
-    const newTab = window.open(`https://www.bing.com/search?pglt=2083&q=${encodeURIComponent(query)}&FORM=ANNTA1&PC=U531`, '_blank');
+    const newTab = window.open(`${encodeURIComponent(query)}&FORM=ANNTA1&PC=U531`, '_blank');
     if (newTab) {
         openedTabs.push(newTab);
     } else {
@@ -115,3 +115,4 @@ document.getElementById("closeTabs").addEventListener("click", () => {
 function goToRewards() {
     window.open("https://rewards.microsoft.com", "_blank");
 }
+
