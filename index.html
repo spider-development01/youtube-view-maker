@@ -3,25 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bing Search Automation</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>YouTube Multi-Tab Opener</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            width: 100%;
+            max-width: 500px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: white;
+            margin-bottom: 8px;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .message.show {
+            opacity: 1;
+        }
+
+        .message.success {
+            background: rgba(76, 175, 80, 0.3);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+        }
+
+        .message.error {
+            background: rgba(244, 67, 54, 0.3);
+            border: 1px solid rgba(244, 67, 54, 0.5);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h2>Bing Search Automation</h2>
-        <input type="number" id="numSearches" placeholder="Number of Searches" max="40" min="1" value="15">
-        <button id="startSearches">Start Searches</button>
-        <button id="stopSearches">Stop Searches</button>
-        <button id="closeTabs">Close All Tabs</button>
-
-        <button class="rewards-button" onclick="goToRewards()">Go to Microsoft Rewards</button>
-
-        <div id="loader-container">
-            <p id="loader-message">Loading...</p>
-            <div id="progress-bar"></div>
+        <h1>🎥 YouTube Multi-Tab Opener</h1>
+        
+        <div class="input-group">
+            <label for="youtubeUrl">YouTube URL</label>
+            <input 
+                type="text" 
+                id="youtubeUrl" 
+                placeholder="https://www.youtube.com/watch?v=..."
+            >
         </div>
+
+        <div class="input-group">
+            <label for="tabCount">Number of Tabs</label>
+            <input 
+                type="number" 
+                id="tabCount" 
+                placeholder="Enter number (1-20)"
+                min="1"
+                max="20"
+                value="1"
+            >
+        </div>
+
+        <button onclick="openTabs()">Open Tabs</button>
+
+        <div class="message" id="message"></div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function openTabs() {
+            const url = document.getElementById('youtubeUrl').value.trim();
+            const count = parseInt(document.getElementById('tabCount').value);
+            const messageEl = document.getElementById('message');
+
+            // Validate URL
+            if (!url) {
+                showMessage('Please enter a YouTube URL', 'error');
+                return;
+            }
+
+            // Basic YouTube URL validation
+            if (!url.includes('youtube.com') && !url.includes('youtu.be')) {
+                showMessage('Please enter a valid YouTube URL', 'error');
+                return;
+            }
+
+            // Validate count
+            if (!count || count < 1 || count > 20) {
+                showMessage('Please enter a number between 1 and 20', 'error');
+                return;
+            }
+
+            // Open tabs
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    window.open(url, '_blank');
+                }, i * 100); // Small delay between each tab to prevent browser blocking
+            }
+
+            showMessage(`Opening ${count} tab${count > 1 ? 's' : ''}...`, 'success');
+        }
+
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `message ${type} show`;
+
+            setTimeout(() => {
+                messageEl.classList.remove('show');
+            }, 3000);
+        }
+
+        // Allow Enter key to submit
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                openTabs();
+            }
+        });
+    </script>
 </body>
 </html>
